@@ -4,3 +4,4 @@ third-party/
 __pycache__/
 *.so
 dist/
+.third-party-cache

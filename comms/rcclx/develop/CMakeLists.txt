@@ -521,9 +521,27 @@ set(SRC_FILES
   src/include/msccl/msccl_struct.h
   src/include/mscclpp/mscclpp_nccl.h
   src/include/nccl_common.h
-  src/include/nccl_net.h
-  src/include/nccl_profiler.h
-  src/include/nccl_tuner.h
+  src/include/plugin/nccl_net.h
+  src/include/plugin/net/net_v6.h
+  src/include/plugin/net/net_v7.h
+  src/include/plugin/net/net_v8.h
+  src/include/plugin/net/net_v9.h
+  src/include/plugin/net/net_v10.h
+  src/include/plugin/nccl_profiler.h
+  src/include/plugin/nccl_tuner.h
+  src/include/plugin/profiler/profiler_v1.h
+  src/include/plugin/profiler/profiler_v2.h
+  src/include/plugin/profiler/profiler_v3.h
+  src/include/plugin/profiler/net_ib.h
+  src/include/plugin/profiler/net_ib_v1.h
+  src/include/plugin/profiler/net_socket.h
+  src/include/plugin/profiler/net_socket_v1.h
+  src/include/plugin/tuner/tuner_v2.h
+  src/include/plugin/tuner/tuner_v3.h
+  src/include/plugin/tuner/tuner_v4.h
+  src/include/mlx5/mlx5dvcore.h
+  src/include/mlx5/mlx5dvsymbols.h
+  src/include/mlx5/mlx5dvwrap.h
   src/include/net_device.h
   src/include/net.h
   src/include/npkit/npkit_event.h
@@ -571,12 +589,14 @@ set(SRC_FILES
   src/include/param.h
   src/include/profiler.h
   src/include/proxy.h
+  src/include/proxy_trace/proxy_trace.h
   src/include/ras.h
   src/include/rccl_common.h
   src/include/rccl_float8.h
   src/include/rccl_vars.h
   src/include/recorder.h
   src/include/register.h
+  src/include/register_inline.h
   src/include/rocm_smi_wrap.h
   src/include/rocmwrap.h
   src/include/roctx.h
@@ -585,8 +605,10 @@ set(SRC_FILES
   src/include/signals.h
   src/include/socket.h
   src/include/strongstream.h
+  src/include/symmetric.h
   src/include/timer.h
   src/include/plugin/profiler/profiler_v4.h
+  src/include/plugin/plugin.h
   src/include/transport.h
   src/include/trees.h
   src/include/tuner.h
@@ -611,7 +633,7 @@ set(SRC_FILES
 # src/misc/nvmlwrap.cc
   src/misc/nvmlwrap_stub.cc
   src/misc/param.cc
-  src/misc/profiler.cc
+  src/plugin/profiler.cc
   src/misc/recorder.cc
   src/misc/rocm_smi_wrap.cc
   src/misc/rocmwrap.cc
@@ -624,9 +646,9 @@ set(SRC_FILES
   src/mnnvl.cc
   src/msccl.cc
   src/nccl.h
-  src/net.cc
+  src/plugin/net.cc
   src/proxy.cc
-# src/ras/client.cc
+  src/ras/client.cc
   src/ras/client_support.cc
   src/ras/collectives.cc
   src/ras/peers.cc
@@ -674,9 +696,6 @@ set(RCCLX_FILES
   meta/ctran/BaselineBootstrap.h
 # meta/scuba/RcclxScubaLogger.cc
 # meta/scuba/RcclxScubaLogger.h
-  meta/testinfra/TestsDistUtils.h
-  meta/testinfra/TestUtils.h
-  meta/testinfra/TestXPlatUtils.h
 )
 
 # Run this command to get RCCLX_LIB_FILES:
@@ -714,13 +733,29 @@ set(RCCLX_LIB_FILES
 set(COMMON_FILES
   comms/common/algorithms/AlgoFactory.cu
   comms/common/algorithms/AlgoFactory.cuh
+  comms/common/algorithms/CollCommon.cuh
   comms/common/algorithms/AlgoUtils.cc
   comms/common/algorithms/AlgoUtils.h
+  comms/common/algorithms/all_gather/AlgoAllGather.cu
+  comms/common/algorithms/all_gather/AlgoAllGather.cuh
+  comms/common/algorithms/all_gather/AllGatherAlgoManager.cu
+  comms/common/algorithms/all_gather/AllGatherAlgoManager.h
+  comms/common/algorithms/all_gather/all_gather_dda.cuh
   comms/common/algorithms/all_reduce/AlgoAllReduce.cu
   comms/common/algorithms/all_reduce/AlgoAllReduce.cuh
   comms/common/algorithms/all_reduce/AllReduceAlgoManager.cu
   comms/common/algorithms/all_reduce/AllReduceAlgoManager.h
   comms/common/algorithms/all_reduce/all_reduce_dda.cuh
+  comms/common/algorithms/all_to_all/AlgoAllToAll.cu
+  comms/common/algorithms/all_to_all/AlgoAllToAll.cuh
+  comms/common/algorithms/all_to_all/AllToAllAlgoManager.cu
+  comms/common/algorithms/all_to_all/AllToAllAlgoManager.h
+  comms/common/algorithms/all_to_all/all_to_all_dda.cuh
+  comms/common/algorithms/reduce_scatter/AlgoReduceScatter.cu
+  comms/common/algorithms/reduce_scatter/AlgoReduceScatter.cuh
+  comms/common/algorithms/reduce_scatter/ReduceScatterAlgoManager.cu
+  comms/common/algorithms/reduce_scatter/ReduceScatterAlgoManager.h
+  comms/common/algorithms/reduce_scatter/reduce_scatter_dda.cuh
   comms/common/IpcGpuBarrier.cu
   comms/common/IpcGpuBarrier.cuh
   comms/common/IpcMemHandler.cc
